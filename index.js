@@ -1,29 +1,42 @@
 const container = document.querySelector('#container')
 const form = document.querySelector('#form')
+const pictures = document.querySelector('#images')
 // const singleImg = document.querySelector('#single-image')
-const imgArr = ['','','','','',]
+const images = photos
+// const imgArr = ['','','','','',]
 const onGetPhotoSuccess = (images) => {
-    // console.log(images) 
-    const imgArr = document.createElement('div')
-        // imgArr.setAttribute('div', 'images.data.children')
-        images.data.children.forEach(photo => {
-        // console.log(photo.data.thumbnail)
-        imgArr.classList.add('images.data.children')
-        imgArr.innerHTML = `
-            <img src= '${photo.data.thumbnail}'/>`
-            container.appendChild(imgArr)
-            // imgArr.style.height = "350px";
-            // imgArr.style.width = "600px";
+ // console.log(images) 
+        images.forEach(photo => {
+            const image = document.createElement('img')
+            // images.classList.add('pictures')
+            image.src = images[i].thumbnail
+            container.appendChild(image)
+            console.log(image)
+            // console.log(container)
+        })
+    }
+    let nextImage = (slideShowImages) => {
+        let i = image.src
+        for (i=0; i<img.length; i++) {
+            console.log(i)
+        }
+        
+    }
 
-            // if (photo.data.thumbnail === self)
-    })}
-        // // let nextImage = () => {
-        // //     for (i = 0; i < imgArr.length; i++);
-        // }
-        
-        
+//         // console.log(photo.data.thumbnail)
+//         imgArr.classList.add('images.data.children')
+//         imgArr.innerHTML = `
+//             <img src= '${photo.data.thumbnail}'/>`
+//             container.appendChild(imgArr)
+//             imgArr.style.height = "350px";
+//             imgArr.style.width = "600px";
+
+//             if (photo.data.thumbnail === self)
+//     })}
+//         // let nextImage = () => {
+//         //     for (i = 0; i < imgArr.length; i++);
+//         }
 // let arrIndex = 0
-
 // const loadImage =() => {
 //     let pic = document.getElementByid('imgArr')
 //     loadImage.innerHTML = " "
@@ -36,9 +49,7 @@ const onGetPhotoSuccess = (images) => {
 //     }
 // const imgLoop = () => {
 //     let interval = setInterval('nextImage', 1000,)
-
 //     if (nextImage = 'self')
-   
 //     }
 
 const childR = () => {
@@ -47,11 +58,13 @@ const childR = () => {
         }
     }
 
-
 document.addEventListener('DOMContentLoaded', () => {
         fetch('https://www.reddit.com/search.json?q=dogs+nsfw:no')
         .then(res => res.json())
-        .then(onGetPhotoSuccess)
+        .then((data) => {
+            console.log(data)
+            onGetPhotoSuccess()
+    })
         .catch(console.error)
 
 })
@@ -66,21 +79,19 @@ const clickImg = (search) => {
                 thumbnail: p.data.thumbnail
             }
         })
-        console.log(images)
+        onGetPhotoSuccess(images)
     })
     .catch(console.error)
 }
-
-// form.addEventListener('submit', event => {
+    document.getElementById('form').addEventListener('submit', event => {
+        event.preventDefault()
+        const search = document.getElementById('input').value
+        clickImg(search)
+    })
+//     form.addEventListener('submit', event => {
 //     event.preventDefault()
 //     imgArr = input.text
 
 // console.log(input.text)
 
 // })
-
-    document.getElementById('form').addEventListener('submit', event => {
-        event.preventDefault()
-        const search = document.getElementById('input').value
-        clickImg(search)
-    })
