@@ -2,19 +2,20 @@ const container = document.querySelector('#container')
 const form = document.querySelector('#form')
 const pictures = document.querySelector('#images')
 // const singleImg = document.querySelector('#single-image')
-const images = photos
+
 // const imgArr = ['','','','','',]
-const onGetPhotoSuccess = (images) => {
+const onGetPhotoSuccess = (data) => {
  // console.log(images) 
-        images.forEach(photo => {
+        image.forEach(photo => {
             const image = document.createElement('img')
-            // images.classList.add('pictures')
+            image.classList.add('pictures')
             image.src = images[i].thumbnail
             container.appendChild(image)
             console.log(image)
             // console.log(container)
         })
     }
+
     let nextImage = (slideShowImages) => {
         let i = image.src
         for (i=0; i<img.length; i++) {
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.json())
         .then((data) => {
             console.log(data)
-            onGetPhotoSuccess()
+            onGetPhotoSuccess(data)
     })
         .catch(console.error)
 
@@ -75,11 +76,11 @@ const clickImg = (search) => {
     .then(res => res.json())
     .then(data => {
         images= data.data.children.map(p => {
-            return{
+            return(data)
                 thumbnail: p.data.thumbnail
-            }
+            
         })
-        onGetPhotoSuccess(images)
+        onGetPhotoSuccess(data)
     })
     .catch(console.error)
 }
