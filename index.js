@@ -2,68 +2,36 @@ const container = document.querySelector('#container')
 const form = document.querySelector('#form')
 const pictures = document.querySelector('#images')
 // const singleImg = document.querySelector('#single-image')
-
-// const imgArr = ['','','','','',]
-const onGetPhotoSuccess = (data) => {
- // console.log(images) 
-        image.forEach(photo => {
-            const image = document.createElement('img')
-            image.classList.add('pictures')
-            image.src = images[i].thumbnail
-            container.appendChild(image)
-            console.log(image)
-            // console.log(container)
-        })
-    }
-
-    let nextImage = (slideShowImages) => {
-        let i = image.src
-        for (i=0; i<img.length; i++) {
-            console.log(i)
-        }
-        
-    }
-
-//         // console.log(photo.data.thumbnail)
-//         imgArr.classList.add('images.data.children')
-//         imgArr.innerHTML = `
-//             <img src= '${photo.data.thumbnail}'/>`
-//             container.appendChild(imgArr)
-//             imgArr.style.height = "350px";
-//             imgArr.style.width = "600px";
-
-//             if (photo.data.thumbnail === self)
-//     })}
-//         // let nextImage = () => {
-//         //     for (i = 0; i < imgArr.length; i++);
-//         }
-// let arrIndex = 0
-// const loadImage =() => {
-//     let pic = document.getElementByid('imgArr')
-//     loadImage.innerHTML = " "
-//     }
-// const nextImage = () => {
-//     arrIndex++
-//     if (arrIndex >= imgArr.length) {
-//         loadImage()
-//          }
-//     }
-// const imgLoop = () => {
-//     let interval = setInterval('nextImage', 1000,)
-//     if (nextImage = 'self')
-//     }
-
-const childR = () => {
+let rotation
+const imgArr = []
+let imgIndex = 0
+const nextImage = () => {
+    imgIndex++
+    const currentImage = imgArr[imgIndex]
+    const image = document.createElement('img')
     while (container.firstChild) {
         container.removeChild(container.firstChild)
         }
+    
+    image.src = currentImage
+            container.appendChild(image)
+    // console.log(currentImage)
+}
+const onGetPhotoSuccess = (data) => {
+//  console.log(data) 
+        data.data.children.forEach(photo => {
+            
+            imgArr.push(photo.data.thumbnail)  
+        })
+       rotation =  setInterval(nextImage, 2000)
+       
     }
 
 document.addEventListener('DOMContentLoaded', () => {
         fetch('https://www.reddit.com/search.json?q=dogs+nsfw:no')
         .then(res => res.json())
         .then((data) => {
-            console.log(data)
+            // console.log(data)
             onGetPhotoSuccess(data)
     })
         .catch(console.error)
@@ -96,3 +64,8 @@ const clickImg = (search) => {
 // console.log(input.text)
 
 // })
+let stopButton = () => {
+    clearInterval(rotation)
+}
+document.getElementById('stop').addEventListener('click', stopButton)
+
